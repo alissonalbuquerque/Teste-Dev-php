@@ -14,16 +14,16 @@
 ## Tarefas
 
 ### Back-End (API Laravel)
-- [] Criar um cliente com as seguintes informações:
+- [x] Criar um cliente com as seguintes informações:
     - Nome completo
     - CPF (validado, único no banco)
     - E-mail (validado, único no banco)
     - Telefone
     - CEP
     - Endereço (logradouro, bairro, cidade, estado)
-- [] Editar um cliente
-- [] Excluir um cliente
-- [] Listar clientes (paginação, filtro por nome, CPF e CEP)
+- [x] Editar um cliente
+- [x] Excluir um cliente
+- [x] Listar clientes (paginação, filtro por nome, CPF e CEP)
 ---
 
 ### Migrations
@@ -36,9 +36,9 @@
 ---
 
 ### Requisitos
-- [] **Validar CPF** (formato correto e não permitir duplicação).
-- [] **Validar e-mail** (formato correto e não permitir duplicação).
-- [] **Validar endereço automaticamente** via [BrasilAPI](https://brasilapi.com.br/docs#tag/CEP-V2) ou qualquer outro endpoint público ao inserir ou atualizar um cliente
+- [x] **Validar CPF** (formato correto e não permitir duplicação).
+- [x] **Validar e-mail** (formato correto e não permitir duplicação).
+- [x] **Validar endereço automaticamente** via [BrasilAPI](https://brasilapi.com.br/docs#tag/CEP-V2) ou qualquer outro endpoint público ao inserir ou atualizar um cliente
 
 ---
 
@@ -58,7 +58,7 @@
 ---
 
 ### Extras
-- [] Implementação do Repository Pattern
+- [x] Implementação do Repository Pattern
 - [] Testes automatizados (unitários ou de integração)
 - [] Dockerização do ambiente para facilitar a instalação
 - [] Implementação de cache para otimizar o desempenho

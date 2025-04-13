@@ -2,8 +2,9 @@
 
 namespace App\Providers;
 
-use App\Repositories\Contracts\UserRepositoryInterface;
-use App\Repositories\Eloquent\UserRepository;
+use App\Http\Resources\ClientResource;
+use App\Repositories\Contracts\ClientRepositoryInterface;
+use App\Repositories\Eloquent\ClientRepository;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -15,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
     {       
         /** @var array */
         $bindings = [
-            UserRepositoryInterface::class => UserRepository::class
+            ClientRepositoryInterface::class => ClientRepository::class
         ];
 
         foreach($bindings as $abstract => $concrete) {
@@ -28,6 +29,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        ClientResource::withoutWrapping();
     }
 }

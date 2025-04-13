@@ -23,10 +23,12 @@ class UpdateClientRequest extends FormRequest
      */
     public function rules(): array
     {
+        $client = $this->route('client');
+
         return [
             'name'    => ['string', 'max:255'],
-            'email'   => ['email', 'unique:clients,email'],
-            'cpf'     => ['cpf', 'unique:clients,cpf'],
+            'email'   => ['email', "unique:clients,email,{$client}"],
+            'cpf'     => ['cpf', "unique:clients,cpf,{$client}"],
             'phone'   => ['celular_com_ddd'],
             'cep'     => ['required', 'formato_cep'],
             // 'address' => [],

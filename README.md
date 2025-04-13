@@ -27,9 +27,9 @@
 ---
 
 ### Migrations
-- [] Migrations
-- [] Seeds
-- [] Factories
+- [x] Migrations
+- [x] Seeds
+- [x] Factories
 
 ---
 

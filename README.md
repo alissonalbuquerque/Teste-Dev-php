@@ -60,7 +60,7 @@
 ### Extras
 - [x] Implementação do Repository Pattern
 - [x] Testes automatizados (unitários ou de integração)
-- [ ] Implementação de cache para otimizar o desempenho
+- [x] Implementação de cache para otimizar o desempenho
 - [ ] Dockerização do ambiente para facilitar a instalação
 
 ---

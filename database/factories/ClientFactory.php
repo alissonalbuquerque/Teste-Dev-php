@@ -4,8 +4,6 @@ namespace Database\Factories;
 
 use App\DTOs\ClientDTO;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 use Faker\Factory as Faker;
 
 /**

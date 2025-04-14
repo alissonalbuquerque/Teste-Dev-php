@@ -38,7 +38,7 @@ class ClientRepository implements ClientRepositoryInterface
         return $this->model->findOrFail($id);
     }
 
-    public function findByNameAndCfpAndCep(?string $name, ?string $cpf, ?string $cep, ?int $per_page = 0) : LengthAwarePaginator {
+    public function findByNameAndCfpAndCep(?string $name, ?string $cpf, ?string $cep, ?int $perPage, ?int $page) : LengthAwarePaginator {
         
         $query = $this->model->query();
 
@@ -54,6 +54,6 @@ class ClientRepository implements ClientRepositoryInterface
             $query->where('cep', 'like', "%{$cep}%");
         }
 
-        return $query->paginate($per_page);
+        return $query->paginate($perPage, ['*'], 'page', $page);
     }
 }

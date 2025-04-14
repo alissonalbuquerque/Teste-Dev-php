@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Cache;
 
 class ClientController extends Controller
 {
@@ -37,13 +38,24 @@ class ClientController extends Controller
                 ->filter(fn($value) => isset($value))
                 ->toArray();
 
-        $per_page = $request->integer('per_page', 10);
+        $page = $request->integer('page', 1);
+
+        $perPage = $request->integer('perPage', 10);
 
         /** @var ClientDTO */
         $clientDTO = new ClientDTO($data);
 
-        /** @var Illuminate\Pagination\LengthAwarePaginator */
-        $clients = $this->clientRepository->findByNameAndCfpAndCep($clientDTO->name, $clientDTO->cpf, $clientDTO->cep, $per_page);
+        /** @var string */
+        $cache_key = 'clients';
+
+        $clients = 
+            Cache::remember(
+                $cache_key, 
+                60, 
+                function() use ($clientDTO, $page, $perPage) {
+                    return $this->clientRepository->findByNameAndCfpAndCep($clientDTO->name, $clientDTO->cpf, $clientDTO->cep, $perPage, $page);
+                }
+            );
 
         return ClientResource::collection($clients);
     }
@@ -72,6 +84,8 @@ class ClientController extends Controller
             /** @var Client */
             $model = $this->clientRepository->create($clientDTO->toArray());
 
+                Cache::forget('clients');
+
             /** @var ClientResource */
             $resource = new ClientResource($model);
 
@@ -92,9 +106,20 @@ class ClientController extends Controller
     public function show(string $id)
     {
         try {
-           /** @var Client */
-            $model = $this->clientRepository->findById($id);
 
+            /** @var string */
+            $cache_key = "client_{$id}";
+
+           /** @var Client */
+            $model =
+                Cache::remember(
+                    $cache_key, 
+                    60, 
+                    function () use ($id) {
+                        return $this->clientRepository->findById($id);
+                    }
+                );
+            
             /** @var ClientResource */
             $resource = new ClientResource($model);
 
@@ -140,6 +165,8 @@ class ClientController extends Controller
             /** @var Client */
             $model = $this->clientRepository->update($id, $clientDTO->toArray());
 
+                Cache::forget("client_{$id}");
+
             /** @var ClientResource */
             $resource = new ClientResource($model);
 
@@ -178,6 +205,8 @@ class ClientController extends Controller
                     'error'   => __('api.model_not_deleted', ['model' => Client::class, 'id' => $id])
                 ], Response::HTTP_UNPROCESSABLE_ENTITY);
             }
+
+                Cache::forget("client_{$id}");
 
             return response()->noContent();
 

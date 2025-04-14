@@ -12,5 +12,5 @@ interface ClientRepositoryInterface
     public function update(string|int $id, array $data) : ?Client;
     public function delete(string|int $id) : bool|null;
     public function findById(string|int $id) : ?Client;
-    public function findByNameAndCfpAndCep(?string $name, ?string $cpf, ?string $cep, ?int $per_page) : LengthAwarePaginator;
+    public function findByNameAndCfpAndCep(?string $name, ?string $cpf, ?string $cep, ?int $per_page, ?int $page) : LengthAwarePaginator;
 }

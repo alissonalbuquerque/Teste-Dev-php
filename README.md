@@ -10,6 +10,14 @@
 
 ## Instruções : Rodar o Projeto
 
+#### Observação
+
+<p> Caso a branch 'master' não esteja com todas as funcionalidades disponíveis, cheque a branch 'alissonalbuquerque' </p>
+
+```bash
+git checkout alissonalbuquerque
+```
+
 #### 1 - Clone o Repositório
 
 ```bash
@@ -72,10 +80,64 @@ php artisan test
 php artisan serve
 ```
 
-#### 10 - 
+## Instruções : Documentação simplificada de API Clients
+
+#### 1 - [API Postman - Compartilhada (Convidado)](https://cloudy-eclipse-169678.postman.co/workspace/Rest-APIs---All-Strategy~506fd672-c6b7-4746-a299-e3adde448a96/collection/23453891-bca50c2e-091e-4b5b-972d-16335e615517?action=share&creator=23453891&active-environment=23453891-2e18ea56-3200-4775-9d2a-142a7a0ea907)
+
+#### 2 - Lista de End-Points
 
 ```bash
++-------------+-------------------------+--------------------------------------------+
+| Método      | Rota                    | Ação                                       |
+|-------------|-------------------------|--------------------------------------------|
+| GET|HEAD    | api/v1/clients          | clients.index   › ClientController@index   |
+| POST        | api/v1/clients          | clients.store   › ClientController@store   |
+| GET|HEAD    | api/v1/clients/{client} | clients.show    › ClientController@show    |
+| PUT|PATCH   | api/v1/clients/{client} | clients.update  › ClientController@update  |
+| DELETE      | api/v1/clients/{client} | clients.destroy › ClientController@destroy |
++-------------+-------------------------+--------------------------------------------+
+```
 
+```bash
+Observação: o argumento {client} nas rotas acima pode ser interpretado como {id} para uso prático
+```
+
+#### 3 - Listagem no Terminal
+
+```bash
+php artisan route:list
+```
+
+#### 4 - Formato do JSON de cadastro (method=POST)
+
+```bash
+{
+    "name"  : "Nome Completo",       # Campo Obrigatório
+    "email" : "usuario@example.net", # Campo Obrigatório
+    "cpf"   : "378.836.327-44",      # Campo Obrigatório
+    "phone" : "(78) 99798-4946",     # Campo Obrigatório
+    "cep"   : "80740-000"            # Campo Obrigatório
+}
+```
+
+```bash
+Observação : para mais informações consulte a classe 'App\Http\Requests\StoreClientRequest'
+```
+
+#### 5 - Formato do JSON de atualizacao (method=PUT)
+
+```bash
+{
+    "name"  : "Nome Completo",       # Campo Opcional
+    "email" : "usuario@example.net", # Campo Opcional
+    "cpf"   : "378.836.327-44",      # Campo Opcional
+    "phone" : "(78) 99798-4946",     # Campo Opcional
+    "cep"   : "80740-000"            # Campo Obrigatório
+}
+```
+
+```bash
+Observação : para mais informações consulte a classe 'App\Http\Requests\UpdateClientRequest'
 ```
 
 ## Tarefas
